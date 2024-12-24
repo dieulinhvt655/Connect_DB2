@@ -4,20 +4,20 @@ import org.example.database.Database;
 import org.example.model.Student;
 import org.example.service.serviceInterface.StudentInterface;
 
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class StudentService implements StudentInterface {
 
     private final Connection connection;
 
-    public StudentService(Connection connection) throws SQLException {
+    public StudentService() throws SQLException {
         this.connection = Database.getConnection();
     }
 
     //insert a student into the studentMS table
+    @Override
     public void insertStudent(Student student) throws SQLException {
         String query = "INSERT INTO students (name, email, dateOfBirth) VALUES (?, ?, ?)";
 
@@ -31,4 +31,63 @@ public class StudentService implements StudentInterface {
 
     }
 
+    //select all student
+    @Override
+    public List<Student> getAllStudents() throws SQLException {
+        String query = "SELECT * FROM students";
+        List<Student> students = new ArrayList<>();
+
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            Student student = mapRowToStudent(resultSet);
+            students.add(student);
+        }
+
+        return students;
+    }
+
+    //Chỉ hiển thị học viên có tên chứa từ "Nguyen"
+    @Override
+    public List<Student> getStudentByName() throws SQLException {
+        String query = "SELECT * FROM students WHERE name LIKE ?";
+        List<Student> students = new ArrayList<>();
+
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            Student student = mapRowToStudent(resultSet);
+            students.add(student);
+        }
+
+        return students;
+    }
+
+    //Hiển thị danh sách học viên theo thứ tự ngày sinh tăng dần.
+    @Override
+    public List<Student> getStudentSortByDateOfBirth() throws SQLException {
+        String query = "SELECT * FROM students ORDER BY dateOfBirth ASC";
+        List<Student> students = new ArrayList<>();
+
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        ResultSet resultSet = preparedStatement.executeQuery();
+
+        while (resultSet.next()) {
+            Student student = mapRowToStudent(resultSet);
+            students.add(student);
+        }
+
+        return students;
+    }
+
+    public Student mapRowToStudent (ResultSet resultSet) throws SQLException {
+        return new Student(
+                resultSet.getInt("id"),
+                resultSet.getString("name"),
+                resultSet.getString("email"),
+                resultSet.getDate("dateOfBirth")
+        );
+    }
 }

@@ -8,7 +8,7 @@ public class Student {
     private String email;
     private Date dateOfBirth;
 
-    public Student() {
+    public Student(String name, String email, Date dateOfBirth) {
     }
 
     public Student(int id, String name, String email, Date dateOfBirth) {
