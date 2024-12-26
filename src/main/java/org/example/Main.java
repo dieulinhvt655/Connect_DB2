@@ -2,12 +2,12 @@ package org.example;
 
 import org.example.model.Student;
 import org.example.service.StudentService;
+import org.example.view.MainMenu;
+import org.example.view.SubMenu;
 
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
@@ -16,10 +16,10 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         StudentService studentService = new StudentService();
 
-        System.out.println("----MENU----");
-        System.out.println("1. Add Student into Database");
-        System.out.println("2. Display student information");
+        MainMenu mainMenu = new MainMenu();
+        SubMenu subMenu = new SubMenu();
 
+        mainMenu.menu();
         System.out.println("Choose an option: ");
         int option = scanner.nextInt();
 
@@ -31,40 +31,54 @@ public class Main {
                 String name = scanner.nextLine();
                 System.out.println("Enter student email: ");
                 String email = scanner.nextLine();
-                System.out.println("Enter student date of birth: ");
-                System.out.print("Nhập ngày sinh (yyyy-MM-dd): ");
-                scanner.next();
-                String dobInput = scanner.nextLine();
-
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                Date dateOfBirth = null;
-                try {
-                    dateOfBirth = formatter.parse(dobInput);
-                } catch (ParseException e) {
-                    System.out.println("Ngày sinh không hợp lệ!");
-                    return;
-                }
+                System.out.println("Enter student date of birth (yyyy-mm-dd): ");
+                LocalDate dateOfBirth = LocalDate.parse(scanner.nextLine());
 
                 Student student = new Student(name, email, dateOfBirth);
                 studentService.insertStudent(student);
 
+                break;
             }
-//            case 2: {
-//                System.out.println("sub menu");
-//                System.out.println("1. Display all students");
-//                System.out.println("2. Display student by name");
-//                System.out.println("3. Display student by date of birth");
-//
-//                System.out.println("Choose an option: ");
-//                int option2 = scanner.nextInt();
-//                switch (option2) {
-//                    case 1: {
-//
-//                    }
-//                }
-//            }
+            //display
+            case 2: {
+                subMenu.displayMenu();
+                System.out.println("Choose an option: ");
+                int option2 = scanner.nextInt();
+                switch (option2) {
+                    case 1: {
+                        System.out.println("All students in database");
+                        for (Student student : studentService.getAllStudents()) {
+                            System.out.println(student);
+                        }
+                        break;
+                    }
+                    case 2: {
+                        System.out.println("Enter student name you want to display: ");
+                        String keyword = scanner.nextLine();
+                        System.out.println("student " + keyword + "you want to display");
+                        for (Student student : studentService.getStudentByName(keyword)) {
+                            System.out.println(student);
+                        }
+                        break;
+                    }
+                    case 3: {
+                        System.out.println("All students in database by date of birth");
+                        for (Student student : studentService.getStudentSortByDateOfBirth()) {
+                            System.out.println(student);
+                        }
+                        break;
+                    }
+                }
+            }
+            // update email
+            case 3: {
+                System.out.println("Enter student ID you want to update");
+                int studentID = scanner.nextInt();
+                scanner.nextLine();
+                System.out.println("Enter new email: ");
+                String newEmail = scanner.nextLine();
+                studentService.updateStudentByID(studentID, newEmail);
+            }
         }
-
-
     }
 }

@@ -1,18 +1,18 @@
 package org.example.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Student {
     private int id;
     private String name;
     private String email;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
 
-    public Student(String name, String email, Date dateOfBirth) {
+    public Student(String name, String email, LocalDate dateOfBirth) {
     }
 
-    public Student(int id, String name, String email, Date dateOfBirth) {
-        this.id = id;
+    public Student(int id, String name, String email, LocalDate dateOfBirth) {
+        this.id = this.id;
         this.name = name;
         this.email = email;
         this.dateOfBirth = dateOfBirth;
@@ -42,21 +42,21 @@ public class Student {
         this.email = email;
     }
 
-    public Date getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
     @Override
     public String toString() {
         return "Student{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
+                "id: " + id +
+                ", name: '" + name + '\'' +
+                ", email: '" + email + '\'' +
+                ", dateOfBirth: " + dateOfBirth +
                 '}';
     }
 }

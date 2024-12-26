@@ -11,8 +11,10 @@ public interface StudentInterface {
 
     List<Student> getAllStudents() throws SQLException;
 
-    List<Student> getStudentByName() throws SQLException;
+    List<Student> getStudentByName(String keyword) throws SQLException;
 
     List<Student> getStudentSortByDateOfBirth() throws SQLException;
+
+    void updateStudentByID (int id, String newEmail) throws SQLException;
 
 }
