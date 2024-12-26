@@ -17,4 +17,5 @@ public interface StudentInterface {
 
     void updateStudentByID (int id, String newEmail) throws SQLException;
 
+    void deleteStudentByID (int id) throws SQLException;
 }

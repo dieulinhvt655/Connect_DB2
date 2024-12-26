@@ -106,6 +106,22 @@ public class StudentService implements StudentInterface {
         else {
             System.out.println("Update student failed!");
         }
+    }
+
+    @Override
+    public void deleteStudentByID (int id) throws SQLException {
+        String query = "DELETE FROM students WHERE id = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, id);
+
+        int rowDelete = preparedStatement.executeUpdate();
+
+        if (rowDelete > 0) {
+            System.out.println("Delete student successful!");
+        }
+        else {
+            System.out.println("Delete student failed!");
+        }
 
     }
 

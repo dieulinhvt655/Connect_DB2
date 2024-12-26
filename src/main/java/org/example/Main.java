@@ -79,6 +79,13 @@ public class Main {
                 String newEmail = scanner.nextLine();
                 studentService.updateStudentByID(studentID, newEmail);
             }
+            //delete
+            case 4: {
+                System.out.println("Enter student ID you want to delete");
+                int studentID = scanner.nextInt();
+                studentService.deleteStudentByID(studentID);
+            }
+
         }
     }
 }
