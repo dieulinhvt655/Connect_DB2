@@ -83,7 +83,15 @@ public class Main {
             case 4: {
                 System.out.println("Enter student ID you want to delete");
                 int studentID = scanner.nextInt();
-                studentService.deleteStudentByID(studentID);
+                System.out.println("Do you want to delete student " + studentID + "? (YES/NO)");
+
+                String answer = scanner.nextLine();
+                if (answer.equals("YES")) {
+                    studentService.deleteStudentByID(studentID);
+                }
+                else {
+                    System.out.println("Don't delete student!");
+                }
             }
 
         }
