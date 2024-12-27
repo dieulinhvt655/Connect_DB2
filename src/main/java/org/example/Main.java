@@ -1,5 +1,6 @@
 package org.example;
 
+import org.example.model.Book;
 import org.example.model.Student;
 import org.example.service.BookService;
 import org.example.service.StudentService;
@@ -112,13 +113,45 @@ public class Main {
                 int optionBook = scanner.nextInt();
                 switch (optionBook) {
                     // add
-                    case 1: {}
+                    case 1: {
+                        scanner.nextLine();
+                        System.out.println("Enter title of the book: ");
+                        String title = scanner.nextLine();
+                        System.out.println("Enter author of the book: ");
+                        String author = scanner.nextLine();
+                        System.out.println("Enter publish date of the book (yyyy-mm-dd): ");
+                        LocalDate publishDate = LocalDate.parse(scanner.nextLine());
+
+                        Book book = new Book(title, author, publishDate);
+                        bookService.insertBook(book);
+
+                        break;
+                    }
                     //display
-                    case 2: {}
+                    case 2: {
+                        System.out.println("All books in database");
+                        for (Book book : bookService.getAllBooks()) {
+                            System.out.println(book);
+                        }
+                        break;
+                    }
                     //update
-                    case 3: {}
+                    case 3: {
+                        System.out.println("Enter student ID you want to update");
+                        int bookID = scanner.nextInt();
+                        scanner.nextLine();
+                        System.out.println("Enter new title of the book: ");
+                        String newTitle = scanner.nextLine();
+
+                        bookService.updateBook(bookID, newTitle);
+                        break;
+                    }
                     //delete
-                    case 4: {}
+                    case 4: {
+                        System.out.println("Enter title of the book you want to delete");
+                        String title = scanner.nextLine();
+                        bookService.deleteBook(title);
+                    }
                 }
             }
         }

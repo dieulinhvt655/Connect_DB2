@@ -7,16 +7,16 @@ public class Book {
     private int id;
     private String title;
     private String author;
-    private LocalDate publishDate;
+    private LocalDate published_date;
 
-    public Book() {
+    public Book(String title, String author, LocalDate publishDate) {
     }
 
-    public Book(int id, String title, String author, LocalDate publishDate) {
+    public Book(int id, String title, String author, LocalDate published_date) {
         this.id = id;
         this.title = title;
         this.author = author;
-        this.publishDate = publishDate;
+        this.published_date = published_date;
     }
 
     public int getId() {
@@ -43,12 +43,12 @@ public class Book {
         this.author = author;
     }
 
-    public LocalDate getPublishDate() {
-        return publishDate;
+    public LocalDate getPublished_date() {
+        return published_date;
     }
 
-    public void setPublishDate(LocalDate publishDate) {
-        this.publishDate = publishDate;
+    public void setPublished_date(LocalDate published_date) {
+        this.published_date = published_date;
     }
 
     @Override
@@ -57,7 +57,7 @@ public class Book {
                 "id: " + id +
                 ", title: '" + title + '\'' +
                 ", author: '" + author + '\'' +
-                ", publishDate: " + publishDate +
+                ", publishDate: " + published_date +
                 '}';
     }
 }
