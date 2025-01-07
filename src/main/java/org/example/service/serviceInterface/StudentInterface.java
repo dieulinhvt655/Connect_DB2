@@ -18,4 +18,8 @@ public interface StudentInterface {
     void updateStudentByID (int id, String newEmail) throws SQLException;
 
     void deleteStudentByID (int id) throws SQLException;
+
+    int getTotalPages(int pageSize) throws SQLException;
+
+    List<Student> getStudentsByPage(int pageSize, int pageNumber) throws SQLException;
 }

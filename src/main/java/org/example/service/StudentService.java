@@ -126,4 +126,36 @@ public class StudentService implements StudentInterface {
 
 
 
+    @Override
+    public int getTotalPages(int pageSize) throws SQLException {
+        String query = "SELECT COUNT(*) FROM students";
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(query);
+
+        if (resultSet.next()) {
+            int totalStudents = resultSet.getInt(1);
+            return (int) Math.ceil((double) totalStudents / pageSize);
+        }
+        return 0;
+    }
+
+    @Override
+    public List<Student> getStudentsByPage(int pageSize, int pageNumber) throws SQLException {
+        List<Student> students = new ArrayList<>();
+        int offset = (pageNumber - 1) * pageSize;
+
+        String query = "SELECT * FROM students LIMIT ? OFFSET ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(query);
+        preparedStatement.setInt(1, offset);
+        preparedStatement.setInt(2, pageSize);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            Student student = mapRowToStudent(resultSet);
+            students.add(student);
+        }
+        return students;
+    }
+
+
+
 }

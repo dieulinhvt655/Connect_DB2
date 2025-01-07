@@ -80,6 +80,10 @@ public class Main {
                                 }
                                 break;
                             }
+                            case 0: {
+                                System.out.println("Exiting program....");
+                                return;
+                            }
                         }
                     }
                     // update email
@@ -103,6 +107,14 @@ public class Main {
                         } else {
                             System.out.println("Don't delete student!");
                         }
+                    }
+                    // display by page
+                    case 5: {
+
+                    }
+                    case 0: {
+                        System.out.println("Exiting program....");
+                        return;
                     }
                 }
             }
@@ -152,7 +164,15 @@ public class Main {
                         String title = scanner.nextLine();
                         bookService.deleteBook(title);
                     }
+                    case 0: {
+                        System.out.println("Exiting program....");
+                        return;
+                    }
                 }
+            }
+            case 0: {
+                System.out.println("Exiting program....");
+                return;
             }
         }
     }

@@ -8,6 +8,7 @@ public class MainMenu {
         System.out.println("-----------------------------------");
         System.out.println("1. Student management");
         System.out.println("2. Book management");
+        System.out.println("0. Exit");
         System.out.println("-----------------------------------");
     }
 
@@ -17,6 +18,9 @@ public class MainMenu {
         System.out.println("1. Add Student into Database");
         System.out.println("2. Display student information");
         System.out.println("3. Update student email by ID ");
+        System.out.println("4. Delete student by ID");
+        System.out.println("5. Display by page");
+        System.out.println("0. Exit");
         System.out.println("-----------------------------------");
     }
 
@@ -28,6 +32,7 @@ public class MainMenu {
         System.out.println("2. Display book information");
         System.out.println("3. Update book title  by ID");
         System.out.println("4. Delete book by name");
+        System.out.println("0. Exit");
         System.out.println("------------------------------------");
     }
 
